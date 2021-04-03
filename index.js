@@ -29,8 +29,15 @@ app.get('/api', function(req, res) {
     res.send({ name: 'Gilbert' });
 });
 */
+
+//error handling middle ware
+app.use(function(err, req, res, next) {
+    //console.log(err);
+    res.status(422).send({ err: err.message });
+});
 //listen to requests
 
+//
 app.listen(process.env.port || 4000, function() {
     console.log('API listening for requests on port 4000');
 });
