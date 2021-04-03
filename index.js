@@ -1,12 +1,24 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-//initialize routes
-const routes = require('./routes/api')
-    //set up express app
+//set up express app
 const app = express();
 
+
+//connect to mongo db
+mongoose.connect('mongodb://localhost/ninjago');
+
+mongoose.Promise = global.Promise;
+
+
+
+
+app.use(bodyParser.json());
+// app.use(express.json());
 //use routes
-app.use('/api', routes);
+//initialize routes
+app.use('/api', require('./routes/api'));
 /*
 app.get('/api', function(req, res) {
     console.log('Get request');
